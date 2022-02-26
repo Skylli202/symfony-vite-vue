@@ -25,4 +25,5 @@
 
 ###> javascript ###
 /node_modules/
+/public/build/
 ###< javascript ###
