@@ -5,5 +5,15 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   plugins: [vue()],
   root: './assets',
-  base: '/assets/'
+  base: '/assets/',
+  build: {
+    manifest: true,
+    assetsDir: '',
+    outDir: '../public/build',
+    rollupOptions: {
+      input: {
+        'main.js': './assets/main.js'
+      }
+    }
+  }
 })
