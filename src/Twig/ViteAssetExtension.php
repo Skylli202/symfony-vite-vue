@@ -46,18 +46,18 @@ class ViteAssetExtension extends AbstractExtension
         $imports = $data[$entry]['imports'];
 
         $html = <<<HTML
-            <script type="module" src="/assets/{$file}" defer></script>
+            <script type="module" src="/build/{$file}" defer></script>
         HTML;
 
         foreach ($css as $cssFile) {
             $html .= <<<HTML
-                <link rel="stylesheet" media="screen" href="/assets/{$cssFile}">
+                <link rel="stylesheet" media="screen" href="/build/{$cssFile}">
             HTML;
         }
 
         foreach ($imports as $importFile) {
             $html .= <<<HTML
-                <link rel="modulepreload" href="/assets/{$importFile}">
+                <link rel="modulepreload" href="/build/{$data[$importFile]['file']}">
             HTML;
         }
 
@@ -67,7 +67,7 @@ class ViteAssetExtension extends AbstractExtension
     public function assetDev(string $entry, array $deps): string
     {
         $html = <<<HTML
-            <script type="module" src="http://localhost:3000/assets/@vite/client"></script>
+            <script type="module" src="https://localhost:3000/build/@vite/client"></script>
         HTML;
 
         if (in_array('react', $deps)) {
@@ -78,7 +78,7 @@ class ViteAssetExtension extends AbstractExtension
         }
 
         $html .= <<<HTML
-            <script type="module" src="http://localhost:3000/assets/{$entry}" defer></script>
+            <script type="module" src="https://localhost:3000/build/{$entry}" defer></script>
         HTML;
 
         return $html;

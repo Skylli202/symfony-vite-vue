@@ -5,7 +5,10 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   plugins: [vue()],
   root: './assets',
-  base: '/assets/',
+  base: '/build/',
+  server: {
+    https: true
+  },
   build: {
     manifest: true,
     assetsDir: '',
@@ -14,6 +17,6 @@ export default defineConfig({
       input: {
         'main.js': './assets/main.js'
       }
-    }
+    },
   }
 })
