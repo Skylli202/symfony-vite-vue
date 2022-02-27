@@ -37,8 +37,6 @@ class ViteAssetExtension extends AbstractExtension
 
     public function assetProd(string $entry): string
     {
-        $html = '';
-
         $rawFile = file_get_contents($this->manifest);
         $data    = json_decode($rawFile, true);
         $file    = $data[$entry]['file'];
@@ -67,7 +65,7 @@ class ViteAssetExtension extends AbstractExtension
     public function assetDev(string $entry, array $deps): string
     {
         $html = <<<HTML
-            <script type="module" src="https://localhost:3000/build/@vite/client"></script>
+            <script type="module" src="https://localhost:3000/assets/@vite/client"></script>
         HTML;
 
         if (in_array('react', $deps)) {
@@ -78,7 +76,7 @@ class ViteAssetExtension extends AbstractExtension
         }
 
         $html .= <<<HTML
-            <script type="module" src="https://localhost:3000/build/{$entry}" defer></script>
+            <script type="module" src="https://localhost:3000/assets/{$entry}" defer></script>
         HTML;
 
         return $html;
