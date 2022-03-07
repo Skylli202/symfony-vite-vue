@@ -4,6 +4,7 @@
 namespace App\Twig;
 
 
+use Error;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -27,6 +28,11 @@ class ViteAssetExtension extends AbstractExtension
         ];
     }
 
+    /**
+     * @param string $entry
+     * @param array<int, string> $deps
+     * @return string
+     */
     public function asset(string $entry, array $deps): string
     {
         if ($this->env !== 'PROD') {
@@ -38,6 +44,9 @@ class ViteAssetExtension extends AbstractExtension
     public function assetProd(string $entry): string
     {
         $rawFile = file_get_contents($this->manifest);
+        if ($rawFile === false) {
+            throw new Error("Vite manifest ($this->manifest) is not found.");
+        }
         $data    = json_decode($rawFile, true);
         $file    = $data[$entry]['file'];
         $css     = $data[$entry]['css'];
@@ -62,6 +71,11 @@ class ViteAssetExtension extends AbstractExtension
         return $html;
     }
 
+    /**
+     * @param string $entry
+     * @param array<int, string> $deps
+     * @return string
+     */
     public function assetDev(string $entry, array $deps): string
     {
         $html = <<<HTML
