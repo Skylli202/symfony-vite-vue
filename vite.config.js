@@ -12,7 +12,7 @@ export default defineConfig({
   build: {
     manifest: true,
     assetsDir: '',
-    outDir: './public/build',
+    outDir: '../public/build',
     rollupOptions: {
       input: {
         'main.js': './assets/main.js'
