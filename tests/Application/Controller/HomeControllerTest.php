@@ -14,5 +14,4 @@ class HomeControllerTest extends WebTestCase
 
         self::assertResponseIsSuccessful();
     }
-
 }
