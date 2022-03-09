@@ -1,2 +1,6 @@
 # Git doit ignorer le lien symbolique nécessaire
 assets
+
+
+# Git doit ignorer le bac à sable PHP
+sandbox.php
