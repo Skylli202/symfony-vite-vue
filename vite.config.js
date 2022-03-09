@@ -14,6 +14,9 @@ export default defineConfig({
     assetsDir: '',
     outDir: '../public/build',
     rollupOptions: {
+      output: {
+        manualChunks: undefined
+      },
       input: {
         'main.js': './assets/main.js'
       }

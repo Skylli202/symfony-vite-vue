@@ -50,7 +50,6 @@ class ViteAssetExtension extends AbstractExtension
         $data    = json_decode($rawFile, true);
         $file    = $data[$entry]['file'];
         $css     = $data[$entry]['css'];
-        $imports = $data[$entry]['imports'];
 
         $html = <<<HTML
             <script type="module" src="/build/{$file}" defer></script>
@@ -59,12 +58,6 @@ class ViteAssetExtension extends AbstractExtension
         foreach ($css as $cssFile) {
             $html .= <<<HTML
                 <link rel="stylesheet" media="screen" href="/build/{$cssFile}">
-            HTML;
-        }
-
-        foreach ($imports as $importFile) {
-            $html .= <<<HTML
-                <link rel="modulepreload" href="/build/{$data[$importFile]['file']}">
             HTML;
         }
 
